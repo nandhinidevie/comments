@@ -1,0 +1,59 @@
+-- import: fastn-community.github.io/design-system as ds
+
+-- ftd.string-field $name: name
+-- ftd.string-field $description: description
+-- ftd.string-field $date: date
+
+-- ds.container:
+inset: $ds.spaces.inset-square.large
+background.solid: $ds.colors.background.step-1
+width.fixed.percent: 40
+radius: $ds.radius.large
+
+-- ds.column:
+width.fixed.percent: 80
+spacing: $ds.spaces.vertical-gap.medium
+align-content: left
+
+-- ds.heading-medium: Comments Box
+
+-- ds.text-input: Name
+size: small
+placeholder: Enter Name
+rounded: true
+$value: $name.value
+
+-- ds.text-input: Date
+size: small
+placeholder: Enter Date
+rounded: true
+type: date
+$value: $date.value
+
+-- ds.text-input: Comment
+placeholder: Enter your comment
+size: small
+rounded: true
+multiline: true
+$value: $description.value
+
+;; -- ds.rating: Rate this post
+
+-- ds.primary-button: Submit
+size: medium
+if: { name.value != "" && description.value != "" && date.value != ""}
+$on-click$: $insert-comments(name=$name, description=$description, date=$date)
+
+-- end: ds.column
+
+-- end: ds.container
+
+
+-- void insert-comments(name, description, date,):
+ftd.string-field name:
+ftd.string-field description:
+ftd.string-field date:
+
+ftd.submit_form(
+    "/insert/", name, description, date,
+)

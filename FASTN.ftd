@@ -1,0 +1,15 @@
+-- import: fastn
+
+-- fastn.package: comments
+
+-- fastn.dependency: fastn-community.github.io/design-system
+
+-- fastn.migration: create-comments-table
+
+CREATE TABLE comments (
+	id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL,
+	description TEXT,
+	date TEXT NOT NULL
+);
+

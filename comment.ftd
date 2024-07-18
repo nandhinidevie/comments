@@ -1,0 +1,74 @@
+-- import: fastn/processors as pr
+-- import: fastn-community.github.io/design-system as ds
+
+-- record comments-data:
+string name:
+string description:
+string date:
+
+
+-- comments-data list data:
+any: 7
+$processor$: pr.sql-query
+
+SELECT name, description, date FROM comments ORDER BY id DESC;
+
+-- show-comment-wrapper:
+
+-- show-comments: $obj
+for: $obj in $data
+
+-- end: show-comment-wrapper
+
+-- component show-comment-wrapper:
+children wrapper:
+
+-- ds.section-column:
+content: $show-comment-wrapper.wrapper
+outer-background.solid: $ds.colors.background.base
+inset: $ds.spaces.inset-tall.zero-medium
+
+-- end: ds.section-column
+
+-- end: show-comment-wrapper
+
+
+
+-- component show-comments:
+caption comments-data data:
+
+-- ds.container:
+inset: $ds.spaces.inset-square.large
+background.solid: $ds.colors.background.step-2
+width.fixed.percent: 90
+radius: $ds.radius.large
+			
+		-- ds.column:
+		width: fill-container
+		spacing: $ds.spaces.vertical-gap.medium
+		align-content: left
+
+			-- ds.row:
+			align-content: left
+			
+			-- ds.copy-regular: 
+
+			$show-comments.data.name
+				
+			-- ds.copy-regular:
+				
+			$show-comments.data.date
+
+			-- end: ds.row
+
+			-- ds.copy-regular:
+				
+			$show-comments.data.description
+				
+		-- end: ds.column
+
+	-- end: ds.container
+
+-- end: show-comments
+
+

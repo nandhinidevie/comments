@@ -1,0 +1,26 @@
+-- import: fastn/processors as pr
+
+-- string name:
+$processor$: pr.request-data
+
+-- string description:
+$processor$: pr.request-data
+
+-- string date:
+$processor$: pr.request-data
+
+
+-- integer insert-comments:
+name: $name
+description: $description
+date: $date
+$processor$: pr.sql-execute
+$always-include$: true
+
+INSERT INTO comments (name, description, date)
+VALUES
+($name, $description, $date);
+
+
+
+-- ftd.permanent-redirect: /comment/
